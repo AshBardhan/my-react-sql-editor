@@ -1,14 +1,17 @@
+import './Sidebar.scss';
+
 export default function Sidebar() {
     return (
-        <div style={{height: '100%'}}>
-            <div style={{display: 'flex', gap: '20px', flexDirection: 'column', height: '100%'}}>
-                <div style={{padding: '20px', border: '1px solid', flexShrink: '0'}}>
-                    <h3>Query Search</h3>
-                </div>
-                <div style={{padding: '20px', border: '1px solid', flexGrow: '1'}}>
-                    <h3>Query List</h3>
-                </div>
+        <div className='sidebar'>
+            <div className='query-search'>
+                <h3>Queries</h3>
+                <input type="text" className="input-text" name="query-search" placeholder='Search Query' />
             </div>
+            <ul className='query-list'>
+                {[...Array(5)].map((u, i) => (
+                    <li>Query List</li>
+                ))}
+            </ul>
         </div>
     )
 }

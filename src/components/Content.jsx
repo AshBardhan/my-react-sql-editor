@@ -1,9 +1,10 @@
 import QueryBox from "./QueryBox";
 import QueryResult from "./QueryResult";
+import './Content.scss';
 
 export default function Content() {
     return (
-        <div style={{height: '100%', display: 'flex', gap: '20px', flexDirection: 'column'}}>
+        <div className="content">
             <QueryBox/>
             <QueryResult/>
         </div>

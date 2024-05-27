@@ -1,7 +1,9 @@
+import './Header.scss';
+
 export default function Header() {
     return (
-        <div style={{padding: '20px', border: '1px solid'}}>
+        <header>
            <h2>Header</h2>
-        </div>
+        </header>
     )
 }
