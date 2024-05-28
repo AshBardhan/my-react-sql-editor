@@ -1,8 +1,8 @@
 import './Content.scss';
 import Button from "./Button";
 import { useState } from 'react';
-import { queryAPI } from '../services/queryAPI';
 import { csvToJson } from '../utils/csvToJson';
+import { QueryService } from '../services/queryService';
 
 export default function Content({selectedQuery}) {
     const [state, setState] = useState({
@@ -23,7 +23,7 @@ export default function Content({selectedQuery}) {
 	};
 
     async function runQuery () {
-        const csvStr = await queryAPI(selectedQuery.input);
+        const csvStr = await QueryService(selectedQuery.input);
         const {headers, data} = await csvToJson(csvStr);
         setState({
             ...state,

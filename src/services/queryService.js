@@ -2,7 +2,7 @@ function waitFor(time) {
     return new Promise((resolve) => setTimeout(resolve, time * 1000));
 };
 
-export async function queryAPI(sqlQuery) {
+export async function QueryService(sqlQuery) {
     await waitFor(0.2);
     const randomNumber = Math.random();
     if (randomNumber < 0.01) {
