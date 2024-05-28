@@ -13,6 +13,7 @@
 	gap: 20px;
 	padding: 20px;
 	background-color: #f5f5f5;
+	border-bottom: 1px solid #acacac;
 }
 
 .query-result {
@@ -24,6 +25,7 @@
 	padding: 20px;
 }
 
+.loading-query-result,
 .no-query-result {
 	margin: 40px 20px;
 	padding: 30px 20px;
@@ -42,7 +44,7 @@
 }
 
 .table-wrapper {
-	border: 1px solid #ababab;
+	border: 1px solid #acacac;;
 	overflow: auto;
 }
 

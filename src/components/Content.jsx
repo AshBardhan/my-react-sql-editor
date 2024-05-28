@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useQueryManager } from '../hooks/useQueryManager';
 
 export default function Content({selectedQueryId}) {
-    const {getQueryById, getQueryResultById, fetchQueryResult} = useQueryManager();
+    const {getQueryById, getQueryResultById, fetchQueryResult, isResultLoading} = useQueryManager();
     const selectedQuery = getQueryById(selectedQueryId);
     const selectedQueryResult = getQueryResultById(selectedQueryId);
 
@@ -24,7 +24,7 @@ export default function Content({selectedQueryId}) {
 	};
 
     return (
-        <div className="content">
+        <div className={`content ${isResultLoading}`}>
         {
             selectedQuery ?
             (
@@ -42,13 +42,19 @@ export default function Content({selectedQueryId}) {
                         <Button theme='primary' isInverted="true" label="Run" handleClick={() => fetchQueryResult(selectedQuery)}/>
                     </div>
                 </div>
-
                 {
-                    selectedQueryResult ? 
+                    isResultLoading ?
+                    (
+                        <div className='loading-query-result'>
+                            Loading query result...
+                        </div>
+                    )
+                    :
+                    selectedQueryResult ?
                     (
                         <div className="query-result">
                             <div>
-                                <h3>{selectedQueryResult.data.length} Results</h3>
+                                <h3>{selectedQueryResult.data.length} Query Results</h3>
                                 <div style={{display: 'flex', gap: '20px'}}>
                                     <div>
                                         <label htmlFor="filterName">Search to filter results</label>
@@ -85,7 +91,7 @@ export default function Content({selectedQueryId}) {
                                 </table>
                             </div>
                         </div>
-                    ) 
+                    )
                     :
                     (
                         <div className='no-query-result'>

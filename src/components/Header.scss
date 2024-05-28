@@ -1,6 +1,13 @@
 header {
 	flex-shrink: 0;
 	display: flex;
+	align-items: center;
 	height: 60px;
-	background-color: aqua;
+	background-color: #232938;
+	padding: 0 20px;
+	
+	h2 {
+		margin: 0;
+		color: #fff;
+	}
 }

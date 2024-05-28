@@ -6,6 +6,7 @@ import { csvToJson } from "../utils/csvToJson";
 export function useQueryManager() {
     const [queryList, setQueryList] = useState(initialQueryData);
     const [resultList, setResultList] = useState([]);
+    const [isResultLoading, setIsResultLoading] = useState(false);
     const [activeQueryId, setActiveQueryId] = useState(null);
 
     function getQueryResultById(id) {
@@ -20,11 +21,13 @@ export function useQueryManager() {
     }
 
     async function fetchQueryResult(query) {
+        setIsResultLoading(true);
         const csvStr = await QueryService(query.input);
         const {headers, data} = await csvToJson(csvStr);
         const newList = [...resultList];
         newList[getIndexOfQuery(query)] = {headers, data};
         setResultList(newList);
+        setIsResultLoading(false);
     }
 
     function getQueryById(id) {
@@ -39,8 +42,9 @@ export function useQueryManager() {
         setQueryList,
         getQueryById,
         activeQueryId,
+        setActiveQueryId,
         getQueryResultById,
         fetchQueryResult,
-        setActiveQueryId
+        isResultLoading
     };
 }
