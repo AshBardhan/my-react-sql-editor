@@ -2,8 +2,6 @@ export function csvToJson (csvString) {
     const lines = csvString.trim().split("\n");
     const headers = lines[0].split(",");
     const data = [];
-
-    console.log(headers);
   
     for (let i = 1; i < lines.length; i++) {
       const currentLine = lines[i].split(",");

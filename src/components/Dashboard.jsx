@@ -4,15 +4,15 @@ import './Dashboard.scss';
 import { useQueryManager } from "../hooks/useQueryManager";
 
 export default function Dashboard() {
-    const {queryList, selectedQuery, setSelectedQuery} = useQueryManager();
+    const {queryList, activeQueryId, setActiveQueryId} = useQueryManager();
 
     return (
         <div className="dashboard">
             <Sidebar
-                queryList={queryList}
-                selectedQuery={selectedQuery}
-                onQuerySelect={(queryItem) => setSelectedQuery(queryItem)} />
-            <Content selectedQuery={selectedQuery}/>
+                queries={queryList}
+                selectedQueryId={activeQueryId}
+                onQuerySelect={(queryId) => setActiveQueryId(queryId)}/>
+            <Content selectedQueryId={activeQueryId}/>
         </div>
     )
 }

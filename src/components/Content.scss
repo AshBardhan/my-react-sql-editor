@@ -24,6 +24,15 @@
 	padding: 20px;
 }
 
+.no-query-result {
+	margin: 40px 20px;
+	padding: 30px 20px;
+	text-align: center;
+	border: 1px solid #acacac;
+	background-color: #ececec;
+	border-radius: 4px;
+}
+
 .no-query-box {
 	flex-grow: 1;
 	display: flex;
@@ -57,6 +66,7 @@ td, th {
 	text-align: left;
 	vertical-align: top;
 	padding: 10px;
+	min-width: 100px;
 }
 
 tbody {
