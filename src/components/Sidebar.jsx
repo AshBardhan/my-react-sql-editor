@@ -1,6 +1,6 @@
 import './Sidebar.scss';
 
-export default function Sidebar() {
+export default function Sidebar({queryList, selectedQuery, onQuerySelect}) {
     return (
         <div className='sidebar'>
             <div className='query-search'>
@@ -8,8 +8,12 @@ export default function Sidebar() {
                 <input type="text" className="input-text" name="query-search" placeholder='Search Query' />
             </div>
             <ul className='query-list'>
-                {[...Array(5)].map((u, i) => (
-                    <li>Query List</li>
+                {queryList.map((queryItem, queryIndex) => (
+                    <li key={queryIndex}
+                        className={queryItem === selectedQuery ? 'selected' : ''}
+                        onClick={() => onQuerySelect(queryItem)}>
+                        {queryItem.name}
+                    </li>
                 ))}
             </ul>
         </div>
