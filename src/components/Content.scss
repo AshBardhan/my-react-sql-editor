@@ -1,5 +1,6 @@
 .content {
 	flex-grow: 1;
+	overflow: hidden;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -16,8 +17,10 @@
 
 .query-result {
 	flex-grow: 1;
+	overflow: hidden;
 	display: flex;
 	flex-direction: column;
+	gap: 20px;
 	padding: 20px;
 }
 
@@ -27,4 +30,37 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+}
+
+.table-wrapper {
+	border: 1px solid #ababab;
+	overflow: auto;
+}
+
+table {
+	width: 100%;
+	border:none;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+thead {
+	th {
+		position: sticky;
+		top: 0;
+		background-color: white;
+		border-bottom: 1px solid #ababab;
+	}
+}
+
+td, th {
+	text-align: left;
+	vertical-align: top;
+	padding: 10px;
+}
+
+tbody {
+	tr:nth-child(odd) {
+		background-color: #ededed;
+	}
 }
