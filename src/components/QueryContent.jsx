@@ -1,26 +1,27 @@
 import './QueryContent.scss';
 import Button from "./Button";
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useQueryManager } from '../hooks/useQueryManager';
 
 export default function QueryContent({queryId}) {
+    const [filterName, setFilterName] = useState('');
+    const [filterCategory, setFilterCategory] = useState('');
     const {getQueryById, getQueryResultById, fetchQueryResult, updateQuery, isResultLoading} = useQueryManager();
     const query = getQueryById(queryId);
     const queryResult = getQueryResultById(queryId);
+    const filteredResult = useMemo(() => {
+        if (filterCategory.length > 0 && filterName.length > 0) {
+          return queryResult?.data.filter((result) => result[filterCategory].includes(filterName)) || [];
+        }
+        return queryResult?.data || [];
+      }, [queryResult, filterName, filterCategory]);
 
-    const [state, setState] = useState({
-		filterName: '',
-        filterOption: 0
-	});
+	const handleFilterCategoryChange = (evt) => {
+		setFilterCategory(evt.target.value);
+	};
 
-    const filterOptions = [5, 10, 15, 20];
-
-	const handleChange = (evt) => {
-		const value = evt.target.value;
-		setState({
-			...state,
-			[evt.target.name]: value,
-		});
+    const handleFilterNameChange = (evt) => {
+		setFilterName(evt.target.value);
 	};
 
     const handleQueryNameChange = (name) => {
@@ -32,7 +33,7 @@ export default function QueryContent({queryId}) {
     };
 
     return (
-        <div className={`content ${isResultLoading}`}>
+        <div className="content">
         {
             query ?
             (
@@ -65,19 +66,21 @@ export default function QueryContent({queryId}) {
                     (
                         <div className="query-result">
                             <div>
-                                <h3>{queryResult.data.length} Query Results</h3>
+                                <h3>{filteredResult.length} Results</h3>
                                 <div style={{display: 'flex', gap: '20px'}}>
-                                    <div>
-                                        <label htmlFor="filterName">Search to filter results</label>
-                                        <input type="text" id="filterName" name="filterName" className="input-text" value={state.filterName} onChange={handleChange}/>
-                                    </div>
-                                    <div>
-                                        <label htmlFor="filter-items">Shows results per page</label>
-                                        <select id="filterOption" name="filterOption" className="input-text" value={state.filterOption} onChange={handleChange}>
-                                            {filterOptions.map((option, index) => (
+                                    <div style={{flexGrow: '1'}}>
+                                        <label htmlFor="filter-items">Filter By</label>
+                                        <select id="filterCategory" name="filterCategory" className="input-text"
+                                            value={filterCategory} onChange={handleFilterCategoryChange}>
+                                            {queryResult.headers.map((option, index) => (
                                                 <option key={index} value={option}>{option}</option>
                                             ))}
                                         </select>
+                                    </div>
+                                    <div style={{flexGrow: '1'}}>
+                                        <label htmlFor="filterName">Filter Name</label>
+                                        <input type="text" id="filterName" name="filterName" className="input-text"
+                                            value={filterName} onChange={handleFilterNameChange}/>
                                     </div>
                                 </div>
                             </div>
@@ -85,19 +88,30 @@ export default function QueryContent({queryId}) {
                                 <table>
                                     <thead>
                                         <tr>
-                                            {queryResult.headers.map((h, i) => (
-                                                <th>{h}</th>
+                                            {queryResult.headers.map((title, i) => (
+                                                <th key={i}>{title}</th>
                                             ))}
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {queryResult.data.map((row) => (
-                                            <tr>
-                                                {Object.keys(row).map((column) => (
-                                                    <td>{row[column]}</td>
-                                                ))}
-                                            </tr>
-                                        ))}
+                                        {
+                                            filteredResult.length ?
+                                            filteredResult.map((row, i) => (
+                                                <tr key={i}>
+                                                    {Object.keys(row).map((column, j) => (
+                                                        <td key={j}>{row[column]}</td>
+                                                    ))}
+                                                </tr>
+                                            ))
+                                            :
+                                            (
+                                                <tr>
+                                                    <td style={{textAlign: 'center'}} colSpan={queryResult.headers.length}>
+                                                        No results found
+                                                    </td>
+                                                </tr>
+                                            )
+                                        }
                                     </tbody>
                                 </table>
                             </div>

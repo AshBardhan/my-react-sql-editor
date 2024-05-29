@@ -72,7 +72,7 @@ td, th {
 }
 
 tbody {
-	tr:nth-child(odd) {
+	tr:nth-child(even) {
 		background-color: #ededed;
 	}
 }
