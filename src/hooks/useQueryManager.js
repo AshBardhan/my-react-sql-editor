@@ -22,7 +22,7 @@ export function useQueryManager() {
 
     async function fetchQueryResult(query) {
         setIsResultLoading(true);
-        const csvStr = await QueryService(query.code);
+        const csvStr = await QueryService();
         const {headers, data} = await csvToJson(csvStr);
         const newResultList = [...resultList];
         newResultList[getIndexOfQuery(query)] = {headers, data};
