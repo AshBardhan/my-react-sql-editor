@@ -5,7 +5,7 @@ function QueryList({queries, selectedQueryId, onQuerySelect}) {
     const [searchInput, setSearchInput] = useState('');
     const filteredQueries = useMemo(() => {
         if (searchInput.length > 0) {
-          return queries.filter((query) => query.name.includes(searchInput));
+          return queries.filter((query) => query.name.toLowerCase().includes(searchInput.toLowerCase()));
         }
         return queries;
       }, [queries, searchInput]);

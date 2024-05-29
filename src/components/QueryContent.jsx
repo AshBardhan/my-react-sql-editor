@@ -11,7 +11,7 @@ export default function QueryContent({queryId}) {
     const queryResult = getQueryResultById(queryId);
     const filteredResult = useMemo(() => {
         if (filterCategory.length > 0 && filterName.length > 0) {
-          return queryResult?.data.filter((result) => result[filterCategory].includes(filterName)) || [];
+          return queryResult?.data.filter((result) => result[filterCategory].toLowerCase().includes(filterName.toLowerCase())) || [];
         }
         return queryResult?.data || [];
       }, [queryResult, filterName, filterCategory]);
