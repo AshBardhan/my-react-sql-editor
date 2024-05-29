@@ -22,12 +22,18 @@ export function useQueryManager() {
 
     async function fetchQueryResult(query) {
         setIsResultLoading(true);
-        const csvStr = await QueryService(query.input);
+        const csvStr = await QueryService(query.code);
         const {headers, data} = await csvToJson(csvStr);
-        const newList = [...resultList];
-        newList[getIndexOfQuery(query)] = {headers, data};
-        setResultList(newList);
+        const newResultList = [...resultList];
+        newResultList[getIndexOfQuery(query)] = {headers, data};
+        setResultList(newResultList);
         setIsResultLoading(false);
+    }
+
+    function updateQuery(query, queryId) {
+      const newQueryList = [...queryList];
+      newQueryList[queryId] = query;
+      setQueryList(newQueryList);
     }
 
     function getQueryById(id) {
@@ -37,12 +43,17 @@ export function useQueryManager() {
         return null;
     }
 
+    function getAllQueries() {
+      return queryList;
+    }
+
     return {
-        queryList,
+        getAllQueries,
         setQueryList,
         getQueryById,
         activeQueryId,
         setActiveQueryId,
+        updateQuery,
         getQueryResultById,
         fetchQueryResult,
         isResultLoading

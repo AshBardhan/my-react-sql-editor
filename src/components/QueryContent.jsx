@@ -1,12 +1,12 @@
-import './Content.scss';
+import './QueryContent.scss';
 import Button from "./Button";
 import { useState } from 'react';
 import { useQueryManager } from '../hooks/useQueryManager';
 
-export default function Content({selectedQueryId}) {
-    const {getQueryById, getQueryResultById, fetchQueryResult, isResultLoading} = useQueryManager();
-    const selectedQuery = getQueryById(selectedQueryId);
-    const selectedQueryResult = getQueryResultById(selectedQueryId);
+export default function QueryContent({queryId}) {
+    const {getQueryById, getQueryResultById, fetchQueryResult, updateQuery, isResultLoading} = useQueryManager();
+    const query = getQueryById(queryId);
+    const queryResult = getQueryResultById(queryId);
 
     const [state, setState] = useState({
 		filterName: '',
@@ -23,23 +23,34 @@ export default function Content({selectedQueryId}) {
 		});
 	};
 
+    const handleQueryNameChange = (name) => {
+        updateQuery({...query, name}, queryId);
+    };
+
+    const handleQueryCodeChange = (code) => {
+        updateQuery({...query, code}, queryId);
+    };
+
     return (
         <div className={`content ${isResultLoading}`}>
         {
-            selectedQuery ?
+            query ?
             (
                 <>
                 <div className='query-box'>
                     <div>
-                        <label htmlFor="query-name">Query Name</label>
-                        <input type='text' name="query-name" className="input-text" id="query-name" value={selectedQuery.name}/>
+                        <label htmlFor="queryName">Query Name</label>
+                        <input type='text' name="queryName" className="input-text"
+                            id="queryName" value={query.name}
+                            onChange={(e) => handleQueryNameChange(e.target.value)}/>
                     </div>
                     <div>
-                        <label htmlFor="query-input">SQL Query Input</label>
-                        <textarea name="query-input" className="text-area" id="query-input" value={selectedQuery.input}></textarea>
+                        <label htmlFor="queryCode">SQL Code</label>
+                        <textarea name="queryCode" className="text-area" id="queryCode"
+                            value={query.code} onChange={(e) => handleQueryCodeChange(e.target.value)}></textarea>
                     </div>
                     <div style={{display: 'flex', gap: '20px'}}>
-                        <Button theme='primary' isInverted="true" label="Run" handleClick={() => fetchQueryResult(selectedQuery)}/>
+                        <Button theme='primary' isInverted="true" label="Run" handleClick={() => fetchQueryResult(query)}/>
                     </div>
                 </div>
                 {
@@ -50,11 +61,11 @@ export default function Content({selectedQueryId}) {
                         </div>
                     )
                     :
-                    selectedQueryResult ?
+                    queryResult ?
                     (
                         <div className="query-result">
                             <div>
-                                <h3>{selectedQueryResult.data.length} Query Results</h3>
+                                <h3>{queryResult.data.length} Query Results</h3>
                                 <div style={{display: 'flex', gap: '20px'}}>
                                     <div>
                                         <label htmlFor="filterName">Search to filter results</label>
@@ -74,13 +85,13 @@ export default function Content({selectedQueryId}) {
                                 <table>
                                     <thead>
                                         <tr>
-                                            {selectedQueryResult.headers.map((h, i) => (
+                                            {queryResult.headers.map((h, i) => (
                                                 <th>{h}</th>
                                             ))}
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {selectedQueryResult.data.map((row) => (
+                                        {queryResult.data.map((row) => (
                                             <tr>
                                                 {Object.keys(row).map((column) => (
                                                     <td>{row[column]}</td>

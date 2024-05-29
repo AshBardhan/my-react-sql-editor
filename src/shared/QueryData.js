@@ -1,14 +1,14 @@
 export const initialQueryData = [
     {
         name: "Customers",
-        input: "SELECT * from customers;"
+        code: "SELECT * from customers;"
     },
     {
         name: "Suppliers From Sales",
-        input: "SELECT * from suppliers WHERE contactTitle='Sales Representative'",
+        code: "SELECT * from suppliers WHERE contactTitle='Sales Representative'",
    },
    {
         name: "Customer with Territory",
-        input: "SELECT customerId, customerName, territoryId, territoryName from customers, territories;"
+        code: "SELECT customerId, customerName, territoryId, territoryName from customers, territories;"
     }
 ];

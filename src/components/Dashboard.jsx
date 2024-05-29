@@ -1,18 +1,20 @@
-import Content from "./Content";
-import Sidebar from "./Sidebar";
+import QueryContent from "./QueryContent";
+import QueryList from "./QueryList";
 import './Dashboard.scss';
 import { useQueryManager } from "../hooks/useQueryManager";
+import { useState } from "react";
 
 export default function Dashboard() {
-    const {queryList, activeQueryId, setActiveQueryId} = useQueryManager();
+    const {getAllQueries} = useQueryManager();
+    const [activeQueryId, setActiveQueryId] = useState(null);
 
     return (
         <div className="dashboard">
-            <Sidebar
-                queries={queryList}
+            <QueryList
+                queries={getAllQueries()}
                 selectedQueryId={activeQueryId}
                 onQuerySelect={(queryId) => setActiveQueryId(queryId)}/>
-            <Content selectedQueryId={activeQueryId}/>
+            <QueryContent queryId={activeQueryId}/>
         </div>
     )
 }
