@@ -20,6 +20,16 @@ export function useQueryManager() {
         return queryList.indexOf(query);
     }
 
+    function createQuery() {
+      const newList = queryList.concat({
+        name:  'New Query',
+        code: ''
+      })
+
+      setQueryList(newList);
+      return newList.length;
+    }
+
     async function fetchQueryResult(query) {
         setIsResultLoading(true);
         const csvStr = await QueryService();
@@ -51,6 +61,7 @@ export function useQueryManager() {
         getAllQueries,
         setQueryList,
         getQueryById,
+        createQuery,
         activeQueryId,
         setActiveQueryId,
         updateQuery,

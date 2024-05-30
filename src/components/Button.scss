@@ -84,19 +84,17 @@
 	}
 }
 
-.btn--tiny {
-	--btn-height: 20px;
-	--btn-font-size: 12px;
-	--btn-padding: 0 6px;
-}
-
 .btn--small {
 	--btn-height: 24px;
 	--btn-font-size: 12px;
 }
 
 .btn--big {
-	--btn-height: 42px;
+	--btn-height: 40px;
 	--btn-font-size: 16px;
 	--btn-padding: 0 20px;
+}
+
+.btn--full {
+	width: 100%
 }

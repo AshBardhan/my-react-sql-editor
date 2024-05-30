@@ -5,14 +5,20 @@ import { useQueryManager } from "../hooks/useQueryManager";
 import { useState } from "react";
 
 export default function Dashboard() {
-    const {getAllQueries} = useQueryManager();
+    const {getAllQueries, createQuery} = useQueryManager();
     const [activeQueryId, setActiveQueryId] = useState(null);
+
+    function createAndSelectQuery() {
+        let newQueryId = createQuery();
+        setActiveQueryId(newQueryId);
+    };
 
     return (
         <div className="dashboard">
             <QueryList
                 queries={getAllQueries()}
                 selectedQueryId={activeQueryId}
+                onCreateQuery={createAndSelectQuery}
                 onQuerySelect={(queryId) => setActiveQueryId(queryId)}/>
             <QueryContent queryId={activeQueryId}/>
         </div>
