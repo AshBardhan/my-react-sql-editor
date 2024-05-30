@@ -1,72 +1,72 @@
-import { useState } from "react";
-import { initialQueryData } from "../shared/QueryData";
-import { QueryService } from "../services/queryService";
-import { csvToJson } from "../utils/csvToJson";
+import {useState} from 'react';
+import {initialQueryData} from '../shared/QueryData';
+import {QueryService} from '../services/queryService';
+import {csvToJson} from '../utils/csvToJson';
 
 export function useQueryManager() {
-    const [queryList, setQueryList] = useState(initialQueryData);
-    const [resultList, setResultList] = useState([]);
-    const [isResultLoading, setIsResultLoading] = useState(false);
-    const [activeQueryId, setActiveQueryId] = useState(null);
+	const [queryList, setQueryList] = useState(initialQueryData);
+	const [resultList, setResultList] = useState([]);
+	const [isResultLoading, setIsResultLoading] = useState(false);
+	const [activeQueryId, setActiveQueryId] = useState(null);
 
-    function getQueryResultById(id) {
-        if (resultList[id]) {
-          return resultList[id];
-        }
-        return null;
-      }
+	function getQueryResultById(id) {
+		if (resultList[id]) {
+			return resultList[id];
+		}
+		return null;
+	}
 
-    function getIndexOfQuery(query) {
-        return queryList.indexOf(query);
-    }
+	function getIndexOfQuery(query) {
+		return queryList.indexOf(query);
+	}
 
-    function createQuery() {
-      const newList = queryList.concat({
-        name:  'New Query',
-        code: ''
-      })
+	function createQuery() {
+		const newList = queryList.concat({
+			name: 'New Query',
+			code: '',
+		});
 
-      setQueryList(newList);
-      return newList.length;
-    }
+		setQueryList(newList);
+		return newList.length;
+	}
 
-    async function fetchQueryResult(query) {
-        setIsResultLoading(true);
-        const csvStr = await QueryService();
-        const {headers, data} = await csvToJson(csvStr);
-        const newResultList = [...resultList];
-        newResultList[getIndexOfQuery(query)] = {headers, data};
-        setResultList(newResultList);
-        setIsResultLoading(false);
-    }
+	async function fetchQueryResult(query) {
+		setIsResultLoading(true);
+		const csvStr = await QueryService();
+		const {headers, data} = await csvToJson(csvStr);
+		const newResultList = [...resultList];
+		newResultList[getIndexOfQuery(query)] = {headers, data};
+		setResultList(newResultList);
+		setIsResultLoading(false);
+	}
 
-    function updateQuery(query, queryId) {
-      const newQueryList = [...queryList];
-      newQueryList[queryId] = query;
-      setQueryList(newQueryList);
-    }
+	function updateQuery(query, queryId) {
+		const newQueryList = [...queryList];
+		newQueryList[queryId] = query;
+		setQueryList(newQueryList);
+	}
 
-    function getQueryById(id) {
-        if (queryList[id]) {
-          return queryList[id];
-        }
-        return null;
-    }
+	function getQueryById(id) {
+		if (queryList[id]) {
+			return queryList[id];
+		}
+		return null;
+	}
 
-    function getAllQueries() {
-      return queryList;
-    }
+	function getAllQueries() {
+		return queryList;
+	}
 
-    return {
-        getAllQueries,
-        setQueryList,
-        getQueryById,
-        createQuery,
-        activeQueryId,
-        setActiveQueryId,
-        updateQuery,
-        getQueryResultById,
-        fetchQueryResult,
-        isResultLoading
-    };
+	return {
+		getAllQueries,
+		setQueryList,
+		getQueryById,
+		createQuery,
+		activeQueryId,
+		setActiveQueryId,
+		updateQuery,
+		getQueryResultById,
+		fetchQueryResult,
+		isResultLoading,
+	};
 }
