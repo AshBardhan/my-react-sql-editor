@@ -1,24 +1,24 @@
 .toggle-switch {
 	position: relative;
 	width: 75px;
-  }
+}
 
-  .toggle-switch-checkbox {
+.toggle-switch-checkbox {
 	opacity: 0;
 	visibility: hidden;
 	position: absolute;
-  }
+}
 
-  .toggle-switch-label {
+.toggle-switch-label {
 	display: block;
 	overflow: hidden;
 	cursor: pointer;
 	border: 1px solid #ababab;
 	border-radius: 20px;
 	margin: 0;
-  }
+}
 
-  .toggle-switch-inner {
+.toggle-switch-inner {
 	display: block;
 	width: 200%;
 	margin-left: -100%;
@@ -26,25 +26,25 @@
 
 	&::before,
 	&::after {
-	  content: '';
-	  display: block;
-	  float: left;
-	  width: 50%;
-	  height: 34px;
-	  padding: 0;
-	  box-sizing: border-box;
+		content: '';
+		display: block;
+		float: left;
+		width: 50%;
+		height: 34px;
+		padding: 0;
+		box-sizing: border-box;
 	}
 
 	&::before {
-	  background-color: #1a1a1a;
-	  color: #fff;
+		background-color: #1a1a1a;
+		color: #fff;
 	}
 
 	&::after {
 		background-color: #bbb;
 		color: #fff;
 	}
-  }
+}
 
 .toggle-switch-switch {
 	display: block;
@@ -60,11 +60,11 @@
 	transition: all 0.3s ease-in 0s;
 }
 
-  .toggle-switch-checkbox:checked + .toggle-switch-label {
+.toggle-switch-checkbox:checked + .toggle-switch-label {
 	.toggle-switch-inner {
-	  margin-left: 0;
+		margin-left: 0;
 	}
 	.toggle-switch-switch {
-	  right: 0px;
+		right: 0px;
 	}
-  }
+}

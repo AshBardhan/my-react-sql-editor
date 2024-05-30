@@ -44,13 +44,13 @@
 }
 
 .table-wrapper {
-	border: 1px solid #acacac;;
+	border: 1px solid #acacac;
 	overflow: auto;
 }
 
 table {
 	width: 100%;
-	border:none;
+	border: none;
 	border-collapse: separate;
 	border-spacing: 0;
 }
@@ -64,7 +64,8 @@ thead {
 	}
 }
 
-td, th {
+td,
+th {
 	text-align: left;
 	vertical-align: top;
 	padding: 10px;
@@ -78,7 +79,9 @@ tbody {
 }
 
 .app--dark {
-	.query-box, .loading-query-result, .no-query-result  {
+	.query-box,
+	.loading-query-result,
+	.no-query-result {
 		background-color: #0f1114;
 	}
 

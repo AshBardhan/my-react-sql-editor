@@ -24,8 +24,8 @@
 	li {
 		padding: 10px;
 		cursor: pointer;
-		
-		&:not(:last-child){
+
+		&:not(:last-child) {
 			border-bottom: 1px solid #acacac;
 		}
 
@@ -57,14 +57,13 @@
 
 	.query-list {
 		li {
-			
-		&:hover {
-			background-color: #0a0c11;
-		}
+			&:hover {
+				background-color: #0a0c11;
+			}
 
-		&.selected {
-			background-color: #06080c;
-		}
+			&.selected {
+				background-color: #06080c;
+			}
 		}
 	}
 }

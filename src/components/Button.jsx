@@ -1,14 +1,7 @@
 import React from 'react';
 import './Button.scss';
 
-export default function Button({
-	type = 'button',
-	size = '', theme = '',
-	isInverted = false,
-	isFull = false,
-	label,
-	handleClick
-}) {
+export default function Button({type = 'button', size = '', theme = '', isInverted = false, isFull = false, label, handleClick}) {
 	const setClassname = () => {
 		let className = 'btn';
 		className += size ? ` btn--${size}` : '';

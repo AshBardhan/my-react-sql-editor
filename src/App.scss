@@ -3,27 +3,36 @@ body {
 }
 
 .app {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow-y: hidden;
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	overflow-y: hidden;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
 	margin-top: 0;
 	margin-bottom: 1em;
 }
 
 .line-separator {
-  border-top: 1px solid;
-  margin: 20px 0;
+	border-top: 1px solid;
+	margin: 20px 0;
 }
 
-.input-text, .text-area {
+.input-text,
+.text-area {
 	cursor: text;
 	border-radius: 2px;
 	padding: 4px 8px;
@@ -44,24 +53,25 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .text-area {
-  min-height: 60px;
-  max-height: 200px;
-  resize: vertical;
+	min-height: 60px;
+	max-height: 200px;
+	resize: vertical;
 }
 
 label {
-  font-weight: 600;
-  margin-bottom: 10px;
-  display: inline-block;
+	font-weight: 600;
+	margin-bottom: 10px;
+	display: inline-block;
 }
 
 .app--dark {
 	background-color: #232938;
 	color: #fff;
 
-	.input-text, .text-area {
+	.input-text,
+	.text-area {
 		background-color: #232938;
 		border-color: #fff;
-		color: #fff
+		color: #fff;
 	}
 }
