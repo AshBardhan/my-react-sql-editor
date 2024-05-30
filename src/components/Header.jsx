@@ -1,9 +1,7 @@
 import './Header.scss';
 
-export default function Header() {
+export default function Header({children}) {
     return (
-        <header>
-           <h2>SQL Query Report Generator</h2>
-        </header>
+        <header>{children}</header>
     )
 }

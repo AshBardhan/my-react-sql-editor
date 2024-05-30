@@ -2,12 +2,22 @@ header {
 	flex-shrink: 0;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	height: 60px;
-	background-color: #232938;
+	background-color: #9a9b9c;
+	border-bottom: 1px solid #9a9b9c;
 	padding: 0 20px;
+	color: #1a1a1a;
 	
 	h2 {
 		margin: 0;
+	}
+}
+
+.app--dark {
+	header {
+		background-color: #212530;
+		border-color: #fff;
 		color: #fff;
 	}
 }

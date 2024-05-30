@@ -54,3 +54,14 @@ label {
   margin-bottom: 10px;
   display: inline-block;
 }
+
+.app--dark {
+	background-color: #232938;
+	color: #fff;
+
+	.input-text, .text-area {
+		background-color: #232938;
+		border-color: #fff;
+		color: #fff
+	}
+}

@@ -76,3 +76,21 @@ tbody {
 		background-color: #ededed;
 	}
 }
+
+.app--dark {
+	.query-box, .loading-query-result, .no-query-result  {
+		background-color: #0f1114;
+	}
+
+	table {
+		background-color: #0f1114;
+	}
+
+	th {
+		background-color: #1a191d;
+	}
+
+	tr:nth-child(even) {
+		background-color: #242329;
+	}
+}
