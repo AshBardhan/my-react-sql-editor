@@ -57,7 +57,8 @@ p {
 label {
 	font-weight: 600;
 	margin-bottom: 10px;
-	display: inline-block;
+	cursor: pointer;
+	display: inline-flex;
 }
 
 .app--dark {

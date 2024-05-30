@@ -1,70 +1,43 @@
 .toggle-switch {
 	position: relative;
-	width: 75px;
+	width: 64px;
+	height: 32px;
 }
 
 .toggle-switch-checkbox {
 	opacity: 0;
 	visibility: hidden;
 	position: absolute;
+	width: 0;
+	height: 0;
+
+	&:checked + .toggle-switch-label {
+		background-color: #1a1a1a;
+
+		.toggle-switch-ball {
+			transform: translateX(32px);
+		}
+	}
 }
 
 .toggle-switch-label {
-	display: block;
-	overflow: hidden;
-	cursor: pointer;
-	border: 1px solid #ababab;
-	border-radius: 20px;
-	margin: 0;
+	position: absolute;
+	inset: 0;
+	height: 100%;
+	border: 2px solid #ababab;
+	border-radius: 16px;
+	display: inline-flex;
+	background-color: #bbb;
 }
 
-.toggle-switch-inner {
-	display: block;
-	width: 200%;
-	margin-left: -100%;
-	transition: margin 0.3s ease-in 0s;
-
-	&::before,
-	&::after {
-		content: '';
-		display: block;
-		float: left;
-		width: 50%;
-		height: 34px;
-		padding: 0;
-		box-sizing: border-box;
-	}
-
-	&::before {
-		background-color: #1a1a1a;
-		color: #fff;
-	}
-
-	&::after {
-		background-color: #bbb;
-		color: #fff;
-	}
-}
-
-.toggle-switch-switch {
-	display: block;
-	width: 24px;
-	margin: 5px;
-	background: #fff;
+.toggle-switch-ball {
 	position: absolute;
 	top: 0;
-	bottom: 0;
-	right: 40px;
-	border: 0 solid #bbb;
-	border-radius: 20px;
-	transition: all 0.3s ease-in 0s;
-}
-
-.toggle-switch-checkbox:checked + .toggle-switch-label {
-	.toggle-switch-inner {
-		margin-left: 0;
-	}
-	.toggle-switch-switch {
-		right: 0px;
-	}
+	left: 0;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	background-color: #fff;
+	transform: translateX(0);
+	transition: transform 0.1s ease-in;
 }

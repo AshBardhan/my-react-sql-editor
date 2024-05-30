@@ -6,8 +6,7 @@ export default function ToggleSwitch({checked, onChange}) {
 		<div className="toggle-switch">
 			<input type="checkbox" className="toggle-switch-checkbox" name="toggle-switch" id="toggle-switch" checked={checked} onChange={(e) => onChange(e)} />
 			<label className="toggle-switch-label" htmlFor="toggle-switch">
-				<span className="toggle-switch-inner"></span>
-				<span className="toggle-switch-switch"></span>
+				<span className="toggle-switch-ball"></span>
 			</label>
 		</div>
 	);
