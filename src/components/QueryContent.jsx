@@ -98,7 +98,7 @@ export default function QueryContent({queryId}) {
 					) : queryResult ? (
 						<div className="query-result">
 							<div>
-								<h3>{filteredResult.length} Results</h3>
+								<h2>{filteredResult.length} Results</h2>
 								<div style={{display: 'flex', gap: '20px'}}>
 									<div style={{flexGrow: '1'}}>
 										<label htmlFor="filter-items">Filter By</label>
@@ -151,7 +151,7 @@ export default function QueryContent({queryId}) {
 				</>
 			) : (
 				<div className="no-query-box">
-					<h4>No Query Selected</h4>
+					<h3>No Query Selected</h3>
 					<p>Kindly select an existing query from the list</p>
 				</div>
 			)}
