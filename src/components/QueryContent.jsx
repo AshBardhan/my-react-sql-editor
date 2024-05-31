@@ -2,20 +2,19 @@ import './QueryContent.scss';
 import Button from './Button';
 import {useEffect, useMemo, useRef, useState} from 'react';
 
-export default function QueryContent({queryId, query, queryResult, fetchQueryResult, updateQuery, isResultLoading}) {
+export default function QueryContent({queryId, query, queryResult, fetchQueryResult, updateQuery, deleteQuery, isResultLoading}) {
 	const [filterName, setFilterName] = useState('');
 	const [filterCategory, setFilterCategory] = useState('');
 	const [tempQuery, setTempQuery] = useState();
 	const [changed, setChanged] = useState(false);
-
 	const queryNameInputRef = useRef(null);
 
 	const filteredResult = useMemo(() => {
-		if (filterCategory.length > 0 && filterName.length > 0) {
+		if (filterCategory.length > 0 && filterName.length > 0 && queryResult?.headers.indexOf(filterCategory) !== -1) {
 			return queryResult?.data.filter((result) => result[filterCategory].toLowerCase().includes(filterName.toLowerCase())) || [];
 		}
 		return queryResult?.data || [];
-	}, [queryResult, filterName, filterCategory]);
+	}, [queryResult, filterCategory, filterName]);
 
 	useEffect(() => {
 		queryNameInputRef.current?.focus();
@@ -23,7 +22,7 @@ export default function QueryContent({queryId, query, queryResult, fetchQueryRes
 		setChanged(false);
 		setFilterName('');
 		setFilterCategory('');
-	}, [query]);
+	}, [query, queryId]);
 
 	const handleFilterCategoryChange = (evt) => {
 		setFilterCategory(evt.target.value);
@@ -58,7 +57,7 @@ export default function QueryContent({queryId, query, queryResult, fetchQueryRes
 								className="input-text"
 								ref={queryNameInputRef}
 								id="queryName"
-								value={tempQuery.name}
+								value={tempQuery.name || ''}
 								onChange={(e) => {
 									setChanged(true);
 									setTempQuery({
@@ -74,7 +73,7 @@ export default function QueryContent({queryId, query, queryResult, fetchQueryRes
 								name="queryCode"
 								className="text-area"
 								id="queryCode"
-								value={tempQuery.code}
+								value={tempQuery.code || ''}
 								onChange={(e) => {
 									setChanged(true);
 									setTempQuery({
@@ -84,7 +83,10 @@ export default function QueryContent({queryId, query, queryResult, fetchQueryRes
 								}}></textarea>
 						</div>
 						<div style={{display: 'flex', justifyContent: 'space-between'}}>
-							<Button theme="primary" isInverted="true" label="Run" handleClick={() => fetchQueryResult(query)} />
+							<div style={{display: 'flex', gap: '10px'}}>
+								<Button theme="primary" isInverted="true" label="Run" handleClick={() => fetchQueryResult(query, queryId)} />
+								<Button theme="negative" isInverted="true" label="Delete" handleClick={() => deleteQuery(queryId)} />
+							</div>
 							<div className={`form-action-buttons ${changed ? 'show' : ''}`}>
 								<Button type="submit" theme="positive" isInverted="true" label="Save" />
 								<Button label="Discard" handleClick={(e) => discardQueryForm(e)} />
@@ -101,7 +103,7 @@ export default function QueryContent({queryId, query, queryResult, fetchQueryRes
 									<div style={{flexGrow: '1'}}>
 										<label htmlFor="filter-items">Filter By</label>
 										<select id="filterCategory" name="filterCategory" className="input-text" value={filterCategory} onChange={handleFilterCategoryChange}>
-											<option disabled={true} selected={true} value="">
+											<option disabled={true} value="">
 												Choose Cateogory
 											</option>
 											{queryResult.headers.map((option, index) => (

@@ -2,11 +2,11 @@ function waitFor(time) {
 	return new Promise((resolve) => setTimeout(resolve, time * 1000));
 }
 
-export async function QueryService() {
+export async function QueryService(queryId) {
 	await waitFor(0.2);
-	const randomNumber = Math.floor(Math.random() * 3);
+	const dataIndex = queryId % 3;
 	let url = '';
-	switch (randomNumber) {
+	switch (dataIndex) {
 		case 1:
 			url = '/data/suppliers.csv';
 			break;

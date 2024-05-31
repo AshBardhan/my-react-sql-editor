@@ -12,7 +12,7 @@ export const initialQueryData = [
 		code: "SELECT * FROM suppliers WHERE contactTitle='Sales Representative;'",
 	},
 	{
-		name: 'Customer with Territory',
+		name: 'Customers amd Territories',
 		code: 'SELECT customerId, customerName, territoryId, territoryName FROM customers, territories;',
 	},
 	{

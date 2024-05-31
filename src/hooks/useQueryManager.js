@@ -10,10 +10,7 @@ export function useQueryManager() {
 	const [activeQueryId, setActiveQueryId] = useState(null);
 
 	function getQueryResultById(id) {
-		if (resultList[id]) {
-			return resultList[id];
-		}
-		return null;
+		return resultList[id] || null;
 	}
 
 	function getIndexOfQuery(query) {
@@ -30,9 +27,9 @@ export function useQueryManager() {
 		return newList.length - 1;
 	}
 
-	async function fetchQueryResult(query) {
+	async function fetchQueryResult(query, queryId) {
 		setIsResultLoading(true);
-		const csvStr = await QueryService();
+		const csvStr = await QueryService(queryId);
 		const {headers, data} = await csvToJson(csvStr);
 		const newResultList = [...resultList];
 		newResultList[getIndexOfQuery(query)] = {headers, data};
@@ -46,11 +43,12 @@ export function useQueryManager() {
 		setQueryList(newQueryList);
 	}
 
+	function deleteQuery(queryId) {
+		setQueryList(queryList.filter((_query, index) => index !== queryId));
+	}
+
 	function getQueryById(id) {
-		if (queryList[id]) {
-			return queryList[id];
-		}
-		return null;
+		return queryList[id] || null;
 	}
 
 	function getAllQueries() {
@@ -65,6 +63,7 @@ export function useQueryManager() {
 		activeQueryId,
 		setActiveQueryId,
 		updateQuery,
+		deleteQuery,
 		getQueryResultById,
 		fetchQueryResult,
 		isResultLoading,
