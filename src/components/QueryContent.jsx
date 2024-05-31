@@ -1,6 +1,6 @@
 import './QueryContent.scss';
 import Button from './Button';
-import {useMemo, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import {useQueryManager} from '../hooks/useQueryManager';
 
 export default function QueryContent({queryId}) {
@@ -15,6 +15,11 @@ export default function QueryContent({queryId}) {
 		}
 		return queryResult?.data || [];
 	}, [queryResult, filterName, filterCategory]);
+
+	const queryNameInputRef = useRef(null);
+	useEffect(() => {
+		queryNameInputRef.current?.focus();
+	}, [queryId]);
 
 	const handleFilterCategoryChange = (evt) => {
 		setFilterCategory(evt.target.value);
@@ -39,7 +44,15 @@ export default function QueryContent({queryId}) {
 					<div className="query-box">
 						<div>
 							<label htmlFor="queryName">Query Name</label>
-							<input type="text" name="queryName" className="input-text" id="queryName" value={query.name} onChange={(e) => handleQueryNameChange(e.target.value)} />
+							<input
+								type="text"
+								name="queryName"
+								className="input-text"
+								ref={queryNameInputRef}
+								id="queryName"
+								value={query.name}
+								onChange={(e) => handleQueryNameChange(e.target.value)}
+							/>
 						</div>
 						<div>
 							<label htmlFor="queryCode">SQL Code</label>
