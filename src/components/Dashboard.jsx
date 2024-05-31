@@ -15,7 +15,13 @@ export default function Dashboard() {
 
 	return (
 		<div className="dashboard">
-			<QueryList queries={getAllQueries()} selectedQueryId={activeQueryId} onCreateQuery={createAndSelectQuery} onQuerySelect={(queryId) => setActiveQueryId(queryId)} />
+			<QueryList
+				queries={getAllQueries()}
+				selectedQueryId={activeQueryId}
+				onCreateQuery={createAndSelectQuery}
+				onSearchUpdate={() => setActiveQueryId(null)}
+				onQuerySelect={(queryId) => setActiveQueryId(queryId)}
+			/>
 			<QueryContent queryId={activeQueryId} />
 		</div>
 	);
