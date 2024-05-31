@@ -25,6 +25,8 @@ export default function QueryContent({queryId}) {
 		queryNameInputRef.current?.focus();
 		setTempQuery({...query});
 		setChanged(false);
+		setFilterName('');
+		setFilterCategory('');
 	}, [query]);
 
 	const handleFilterCategoryChange = (evt) => {
@@ -103,6 +105,9 @@ export default function QueryContent({queryId}) {
 									<div style={{flexGrow: '1'}}>
 										<label htmlFor="filter-items">Filter By</label>
 										<select id="filterCategory" name="filterCategory" className="input-text" value={filterCategory} onChange={handleFilterCategoryChange}>
+											<option disabled={true} selected={true} value="">
+												Choose Cateogory
+											</option>
 											{queryResult.headers.map((option, index) => (
 												<option key={index} value={option}>
 													{option}
