@@ -78,6 +78,18 @@ tbody {
 	}
 }
 
+.form-action-buttons {
+	display: flex;
+	gap: 10px;
+	visibility: hidden;
+	opacity: 0;
+
+	&.show {
+		visibility: visible;
+		opacity: 1;
+	}
+}
+
 .app--dark {
 	.query-box,
 	.loading-query-result,

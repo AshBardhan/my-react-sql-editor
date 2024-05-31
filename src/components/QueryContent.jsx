@@ -8,6 +8,11 @@ export default function QueryContent({queryId}) {
 	const [filterCategory, setFilterCategory] = useState('');
 	const {getQueryById, getQueryResultById, fetchQueryResult, updateQuery, isResultLoading} = useQueryManager();
 	const query = getQueryById(queryId);
+	const [tempQuery, setTempQuery] = useState();
+	const [changed, setChanged] = useState(false);
+
+	const queryNameInputRef = useRef(null);
+
 	const queryResult = getQueryResultById(queryId);
 	const filteredResult = useMemo(() => {
 		if (filterCategory.length > 0 && filterName.length > 0) {
@@ -16,10 +21,11 @@ export default function QueryContent({queryId}) {
 		return queryResult?.data || [];
 	}, [queryResult, filterName, filterCategory]);
 
-	const queryNameInputRef = useRef(null);
 	useEffect(() => {
 		queryNameInputRef.current?.focus();
-	}, [queryId]);
+		setTempQuery({...query});
+		setChanged(false);
+	}, [query]);
 
 	const handleFilterCategoryChange = (evt) => {
 		setFilterCategory(evt.target.value);
@@ -29,19 +35,23 @@ export default function QueryContent({queryId}) {
 		setFilterName(evt.target.value);
 	};
 
-	const handleQueryNameChange = (name) => {
-		updateQuery({...query, name}, queryId);
-	};
+	function updateQueryForm(e) {
+		e.preventDefault();
+		updateQuery({...tempQuery}, queryId);
+		setChanged(false);
+	}
 
-	const handleQueryCodeChange = (code) => {
-		updateQuery({...query, code}, queryId);
-	};
+	function discardQueryForm(e) {
+		e.preventDefault();
+		setTempQuery({...query});
+		setChanged(false);
+	}
 
 	return (
 		<div className="content">
-			{query ? (
+			{query && tempQuery ? (
 				<>
-					<div className="query-box">
+					<form className="query-box" id="query" onSubmit={updateQueryForm}>
 						<div>
 							<label htmlFor="queryName">Query Name</label>
 							<input
@@ -50,18 +60,39 @@ export default function QueryContent({queryId}) {
 								className="input-text"
 								ref={queryNameInputRef}
 								id="queryName"
-								value={query.name}
-								onChange={(e) => handleQueryNameChange(e.target.value)}
+								value={tempQuery.name}
+								onChange={(e) => {
+									setChanged(true);
+									setTempQuery({
+										...tempQuery,
+										name: e.target.value,
+									});
+								}}
 							/>
 						</div>
 						<div>
 							<label htmlFor="queryCode">SQL Code</label>
-							<textarea name="queryCode" className="text-area" id="queryCode" value={query.code} onChange={(e) => handleQueryCodeChange(e.target.value)}></textarea>
+							<textarea
+								name="queryCode"
+								className="text-area"
+								id="queryCode"
+								value={tempQuery.code}
+								onChange={(e) => {
+									setChanged(true);
+									setTempQuery({
+										...tempQuery,
+										code: e.target.value,
+									});
+								}}></textarea>
 						</div>
-						<div style={{display: 'flex', gap: '20px'}}>
+						<div style={{display: 'flex', justifyContent: 'space-between'}}>
 							<Button theme="primary" isInverted="true" label="Run" handleClick={() => fetchQueryResult(query)} />
+							<div className={`form-action-buttons ${changed ? 'show' : ''}`}>
+								<Button type="submit" theme="positive" isInverted="true" label="Save" />
+								<Button label="Discard" handleClick={(e) => discardQueryForm(e)} />
+							</div>
 						</div>
-					</div>
+					</form>
 					{isResultLoading ? (
 						<div className="loading-query-result">Loading query result...</div>
 					) : queryResult ? (
