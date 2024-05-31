@@ -35,18 +35,18 @@
 }
 
 .btn--negative {
-	--btn-default-color: #cc3131;
-	--btn-hover-color: #a32727;
+	--btn-default-color: #a91717;
+	--btn-hover-color: #cc3131;
 }
 
 .btn--positive {
-	--btn-default-color: #47b178;
-	--btn-hover-color: #398e60;
+	--btn-default-color: #085f30;
+	--btn-hover-color: #47b178;
 }
 
 .btn--primary {
-	--btn-default-color: #3892e3;
-	--btn-hover-color: #2d75b6;
+	--btn-default-color: #0b4a83;
+	--btn-hover-color: #3892e3;
 }
 
 .btn--inverted {
@@ -61,18 +61,18 @@
 	}
 
 	&.btn--primary {
-		--btn-default-bg-color: #3892e3;
-		--btn-hover-bg-color: #2d75b6;
+		--btn-default-bg-color: #0b4a83;
+		--btn-hover-bg-color: #3892e3;
 	}
 
 	&.btn--positive {
-		--btn-default-bg-color: #47b178;
-		--btn-hover-bg-color: #398e60;
+		--btn-default-bg-color: #085f30;
+		--btn-hover-bg-color: #47b178;
 	}
 
 	&.btn--negative {
-		--btn-default-bg-color: #cc3131;
-		--btn-hover-bg-color: #a32727;
+		--btn-default-bg-color: #a91717;
+		--btn-hover-bg-color: #cc3131;
 	}
 }
 

@@ -14,7 +14,7 @@ function QueryList({queries, selectedQueryId, onSearchUpdate, onQuerySelect, onC
 	return (
 		<div className="sidebar">
 			<div className="query-search">
-				<h3>Queries ({filteredQueries.length})</h3>
+				<h2>Queries ({filteredQueries.length})</h2>
 				<input
 					type="search"
 					className="input-text"
