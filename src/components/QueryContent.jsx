@@ -1,6 +1,7 @@
 import './QueryContent.scss';
 import Button from './Button';
 import {useEffect, useMemo, useRef, useState} from 'react';
+import {downloadFile} from '../utils/fileUtils';
 
 export default function QueryContent({queryId, query, queryResult, fetchQueryResult, updateQuery, deleteQuery, isResultLoading}) {
 	const [filterName, setFilterName] = useState('');
@@ -97,26 +98,44 @@ export default function QueryContent({queryId, query, queryResult, fetchQueryRes
 						<div className="loading-query-result">Loading query result...</div>
 					) : queryResult ? (
 						<div className="query-result">
-							<div>
+							<div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
 								<h2>{filteredResult.length} Results</h2>
-								<div style={{display: 'flex', gap: '20px'}}>
-									<div style={{flexGrow: '1'}}>
-										<label htmlFor="filter-items">Filter By</label>
-										<select id="filterCategory" name="filterCategory" className="input-text" value={filterCategory} onChange={handleFilterCategoryChange}>
-											<option disabled={true} value="">
-												Choose Cateogory
+								<div style={{display: 'flex', gap: '10px'}}>
+									<Button
+										theme="primary"
+										size="small"
+										isInverted="true"
+										label="Export JSON"
+										disabled={!filteredResult.length}
+										handleClick={() => downloadFile(filteredResult, `Report-${query.name}`, 'pdf')}
+									/>
+									<Button
+										theme="primary"
+										size="small"
+										isInverted="true"
+										label="Export CSV"
+										disabled={!filteredResult.length}
+										handleClick={() => downloadFile(filteredResult, `Report-${query.name}`, 'csv')}
+									/>
+								</div>
+							</div>
+							<div style={{display: 'flex', gap: '20px'}}>
+								<div style={{flexGrow: '1'}}>
+									<label htmlFor="filter-items">Filter By</label>
+									<select id="filterCategory" name="filterCategory" className="input-text" value={filterCategory} onChange={handleFilterCategoryChange}>
+										<option disabled={true} value="">
+											Choose Cateogory
+										</option>
+										{queryResult.headers.map((option, index) => (
+											<option key={index} value={option}>
+												{option}
 											</option>
-											{queryResult.headers.map((option, index) => (
-												<option key={index} value={option}>
-													{option}
-												</option>
-											))}
-										</select>
-									</div>
-									<div style={{flexGrow: '1'}}>
-										<label htmlFor="filterName">Filter Name</label>
-										<input type="text" id="filterName" name="filterName" className="input-text" value={filterName} onChange={handleFilterNameChange} />
-									</div>
+										))}
+									</select>
+								</div>
+								<div style={{flexGrow: '1'}}>
+									<label htmlFor="filterName">Filter Name</label>
+									<input type="text" id="filterName" name="filterName" className="input-text" value={filterName} onChange={handleFilterNameChange} />
 								</div>
 							</div>
 							<div className="table-wrapper">

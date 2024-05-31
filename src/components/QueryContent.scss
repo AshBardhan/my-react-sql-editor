@@ -23,6 +23,10 @@
 	flex-direction: column;
 	gap: 20px;
 	padding: 20px;
+
+	h2 {
+		margin: 0;
+	}
 }
 
 .loading-query-result,

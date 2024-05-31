@@ -1,8 +1,8 @@
 .btn {
-	--btn-default-color: #4e5963;
+	--btn-default-color: #3a3b3d;
 	--btn-hover-color: #2b3945;
 	--btn-default-bg-color: #fff;
-	--btn-hover-bg-color: #dadada;
+	--btn-hover-bg-color: #f0f0f0;
 	--btn-height: 32px;
 	--btn-font-size: 14px;
 	--btn-padding: 0 10px;
@@ -31,6 +31,12 @@
 		color: var(--btn-hover-color);
 		background-color: var(--btn-hover-bg-color);
 		border-color: var(--btn-hover-color);
+	}
+
+	&[disabled] {
+		cursor: default;
+		opacity: 0.5;
+		pointer-events: none;
 	}
 }
 

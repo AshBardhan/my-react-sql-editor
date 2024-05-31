@@ -1,7 +1,7 @@
 import React from 'react';
 import './Button.scss';
 
-export default function Button({type = 'button', size = '', theme = '', isInverted = false, isFull = false, label, handleClick}) {
+export default function Button({type = 'button', size = '', theme = '', isInverted = false, isFull = false, disabled = false, label, handleClick}) {
 	const setClassname = () => {
 		let className = 'btn';
 		className += size ? ` btn--${size}` : '';
@@ -11,7 +11,7 @@ export default function Button({type = 'button', size = '', theme = '', isInvert
 		return className;
 	};
 	return (
-		<button type={type} onClick={handleClick} className={setClassname()}>
+		<button type={type} disabled={disabled} onClick={handleClick} className={setClassname()}>
 			{label}
 		</button>
 	);

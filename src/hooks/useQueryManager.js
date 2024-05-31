@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {initialQueryData} from '../shared/QueryData';
 import {QueryService} from '../services/queryService';
-import {csvToJson} from '../utils/csvToJson';
+import {csvToJson} from '../utils/fileUtils';
 
 export function useQueryManager() {
 	const [queryList, setQueryList] = useState(initialQueryData);
