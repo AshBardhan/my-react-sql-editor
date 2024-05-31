@@ -10,7 +10,7 @@ function App() {
 	return (
 		<div className={`app ${isThemeDark ? 'app--dark' : ''}`}>
 			<Header>
-				<h2>SQL Query Report Dashboard</h2>
+				<h1>SQL Report Dashboard</h1>
 				<ToggleSwitch onChange={() => setIsThemeDark(!isThemeDark)} />
 			</Header>
 			<Dashboard />
