@@ -14,7 +14,7 @@ function QueryList({queries, selectedQueryId, onQuerySelect, onCreateQuery}) {
 	return (
 		<div className="sidebar">
 			<div className="query-search">
-				<h3>Queries {filteredQueries.length}</h3>
+				<h3>Queries ({filteredQueries.length})</h3>
 				<input
 					type="text"
 					className="input-text"
