@@ -5,7 +5,8 @@ import {useQueryManager} from '../hooks/useQueryManager';
 import {useState} from 'react';
 
 export default function Dashboard() {
-	const {getAllQueries, createQuery} = useQueryManager();
+	const {getAllQueries, createQuery, getQueryById, getQueryResultById, fetchQueryResult, updateQuery, isResultLoading} = useQueryManager();
+
 	const [activeQueryId, setActiveQueryId] = useState(null);
 
 	function createAndSelectQuery() {
@@ -22,7 +23,14 @@ export default function Dashboard() {
 				onSearchUpdate={() => setActiveQueryId(null)}
 				onQuerySelect={(queryId) => setActiveQueryId(queryId)}
 			/>
-			<QueryContent queryId={activeQueryId} />
+			<QueryContent
+				queryId={activeQueryId}
+				query={getQueryById(activeQueryId)}
+				queryResult={getQueryResultById(activeQueryId)}
+				fetchQueryResult={fetchQueryResult}
+				updateQuery={updateQuery}
+				isResultLoading={isResultLoading}
+			/>
 		</div>
 	);
 }

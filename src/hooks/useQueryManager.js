@@ -22,12 +22,12 @@ export function useQueryManager() {
 
 	function createQuery() {
 		const newList = queryList.concat({
-			name: 'New Query',
-			code: '',
+			name: `New Query ${queryList.length + 1}`,
+			code: 'SELECT * FROM <table_name> [WHERE <statement>];',
 		});
 
 		setQueryList(newList);
-		return newList.length;
+		return newList.length - 1;
 	}
 
 	async function fetchQueryResult(query) {

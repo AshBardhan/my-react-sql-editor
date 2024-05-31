@@ -1,19 +1,15 @@
 import './QueryContent.scss';
 import Button from './Button';
 import {useEffect, useMemo, useRef, useState} from 'react';
-import {useQueryManager} from '../hooks/useQueryManager';
 
-export default function QueryContent({queryId}) {
+export default function QueryContent({queryId, query, queryResult, fetchQueryResult, updateQuery, isResultLoading}) {
 	const [filterName, setFilterName] = useState('');
 	const [filterCategory, setFilterCategory] = useState('');
-	const {getQueryById, getQueryResultById, fetchQueryResult, updateQuery, isResultLoading} = useQueryManager();
-	const query = getQueryById(queryId);
 	const [tempQuery, setTempQuery] = useState();
 	const [changed, setChanged] = useState(false);
 
 	const queryNameInputRef = useRef(null);
 
-	const queryResult = getQueryResultById(queryId);
 	const filteredResult = useMemo(() => {
 		if (filterCategory.length > 0 && filterName.length > 0) {
 			return queryResult?.data.filter((result) => result[filterCategory].toLowerCase().includes(filterName.toLowerCase())) || [];
