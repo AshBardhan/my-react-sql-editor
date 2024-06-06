@@ -1,8 +1,8 @@
 import QueryContent from './QueryContent';
 import QueryList from './QueryList';
-import './Dashboard.scss';
 import {useQueryManager} from '../hooks/useQueryManager';
 import {useState} from 'react';
+import './Dashboard.scss';
 
 export default function Dashboard() {
 	const {getAllQueries, createQuery, getQueryById, getQueryResultById, fetchQueryResult, updateQuery, deleteQuery, isResultLoading} = useQueryManager();

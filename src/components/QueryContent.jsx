@@ -1,37 +1,41 @@
-import './QueryContent.scss';
 import Button from './Button';
 import {useEffect, useMemo, useRef, useState} from 'react';
 import {downloadFile} from '../utils/fileUtils';
+import './QueryContent.scss';
 
 export default function QueryContent({queryId, query, queryResult, fetchQueryResult, updateQuery, deleteQuery, isResultLoading}) {
-	const [filterName, setFilterName] = useState('');
-	const [filterCategory, setFilterCategory] = useState('');
+	const [filter, setFilter] = useState({
+		name: '',
+		category: '',
+	});
 	const [tempQuery, setTempQuery] = useState();
 	const [changed, setChanged] = useState(false);
 	const queryNameInputRef = useRef(null);
 
 	const filteredResult = useMemo(() => {
-		if (filterCategory.length > 0 && filterName.length > 0 && queryResult?.headers.indexOf(filterCategory) !== -1) {
-			return queryResult?.data.filter((result) => result[filterCategory].toLowerCase().includes(filterName.toLowerCase())) || [];
+		if (filter.category.length > 0 && filter.name.length > 0 && queryResult?.headers.indexOf(filter.category) !== -1) {
+			return queryResult?.data.filter((result) => result[filter.category].toLowerCase().includes(filter.name.toLowerCase())) || [];
 		}
 		return queryResult?.data || [];
-	}, [queryResult, filterCategory, filterName]);
+	}, [queryResult, filter]);
 
 	useEffect(() => {
 		queryNameInputRef.current?.focus();
 		setTempQuery({...query});
 		setChanged(false);
-		setFilterName('');
-		setFilterCategory('');
+		setFilter({
+			name: '',
+			category: '',
+		});
 	}, [query, queryId]);
 
-	const handleFilterCategoryChange = (evt) => {
-		setFilterCategory(evt.target.value);
-	};
-
-	const handleFilterNameChange = (evt) => {
-		setFilterName(evt.target.value);
-	};
+	function onFilterInputChange(e) {
+		e.preventDefault();
+		setFilter({
+			...filter,
+			[e.target.name]: e.target.value,
+		});
+	}
 
 	function updateQueryForm(e) {
 		e.preventDefault();
@@ -123,8 +127,8 @@ export default function QueryContent({queryId, query, queryResult, fetchQueryRes
 							</div>
 							<div style={{display: 'flex', gap: '20px'}}>
 								<div style={{flexGrow: '1'}}>
-									<label htmlFor="filter-items">Filter By</label>
-									<select id="filterCategory" name="filterCategory" className="input-text" value={filterCategory} onChange={handleFilterCategoryChange}>
+									<label htmlFor="category">Filter By</label>
+									<select id="category" name="category" className="input-text" value={filter.category} onChange={onFilterInputChange}>
 										<option disabled={true} value="">
 											Choose Cateogory
 										</option>
@@ -136,8 +140,8 @@ export default function QueryContent({queryId, query, queryResult, fetchQueryRes
 									</select>
 								</div>
 								<div style={{flexGrow: '1'}}>
-									<label htmlFor="filterName">Filter Name</label>
-									<input type="text" id="filterName" name="filterName" className="input-text" value={filterName} onChange={handleFilterNameChange} />
+									<label htmlFor="name">Filter Name</label>
+									<input type="text" id="name" name="name" className="input-text" value={filter.name} onChange={onFilterInputChange} />
 								</div>
 							</div>
 							<div className="table-wrapper">
@@ -160,9 +164,7 @@ export default function QueryContent({queryId, query, queryResult, fetchQueryRes
 											))
 										) : (
 											<tr>
-												<td style={{textAlign: 'center'}} colSpan={queryResult.headers.length}>
-													No results found
-												</td>
+												<td colSpan={queryResult.headers.length}>No results found</td>
 											</tr>
 										)}
 									</tbody>

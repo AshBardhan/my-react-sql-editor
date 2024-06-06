@@ -1,6 +1,6 @@
 import {memo, useMemo, useState} from 'react';
-import './QueryList.scss';
 import Button from './Button';
+import './QueryList.scss';
 
 function QueryList({queries, selectedQueryId, onSearchUpdate, onQuerySelect, onCreateQuery}) {
 	const [searchInput, setSearchInput] = useState('');

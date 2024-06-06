@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import Dashboard from './components/Dashboard';
 import Header from './components/Header';
-import './App.scss';
 import ToggleSwitch from './components/ToggleSwitch';
+import './App.scss';
 
 function App() {
 	const [isThemeDark, setIsThemeDark] = useState(false);

@@ -1,4 +1,3 @@
-import React from 'react';
 import './ToggleSwitch.scss';
 
 export default function ToggleSwitch({checked, onChange}) {

@@ -1,4 +1,3 @@
-import React from 'react';
 import './Button.scss';
 
 export default function Button({type = 'button', size = '', theme = '', isInverted = false, isFull = false, disabled = false, label, handleClick}) {

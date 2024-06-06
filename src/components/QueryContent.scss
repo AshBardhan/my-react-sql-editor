@@ -74,6 +74,10 @@ th {
 	vertical-align: top;
 	padding: 10px;
 	min-width: 100px;
+
+	&[colspan] {
+		text-align: center;
+	}
 }
 
 tbody {
