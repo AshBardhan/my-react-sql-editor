@@ -99,7 +99,9 @@ export default function QueryContent({queryId, query, queryResult, fetchQueryRes
 					) : queryResult ? (
 						<div className="query-result">
 							<div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-								<h2>{filteredResult.length} Results</h2>
+								<h2>
+									{filteredResult.length} Result{filteredResult.length !== 1 ? 's' : ''}
+								</h2>
 								<div style={{display: 'flex', gap: '10px'}}>
 									<Button
 										theme="primary"

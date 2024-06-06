@@ -3,12 +3,7 @@ import './Button.scss';
 
 export default function Button({type = 'button', size = '', theme = '', isInverted = false, isFull = false, disabled = false, label, handleClick}) {
 	const setClassname = () => {
-		let className = 'btn';
-		className += size ? ` btn--${size}` : '';
-		className += theme ? ` btn--${theme}` : '';
-		className += isInverted ? ` btn--inverted` : '';
-		className += isFull ? ` btn--full` : '';
-		return className;
+		return `btn${size ? ` btn--${size}` : ''}${theme ? ` btn--${theme}` : ''}${isInverted ? ` btn--inverted` : ''}${isFull ? ` btn--full` : ''}`;
 	};
 	return (
 		<button type={type} disabled={disabled} onClick={handleClick} className={setClassname()}>
