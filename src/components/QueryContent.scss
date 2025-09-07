@@ -1,6 +1,6 @@
 .content {
 	flex-grow: 1;
-	overflow: hidden;
+	overflow-y: auto;
 	height: 100%;
 	display: flex;
 	flex-direction: column;
@@ -18,7 +18,6 @@
 
 .query-result {
 	flex-grow: 1;
-	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
@@ -49,6 +48,7 @@
 
 .table-wrapper {
 	border: 1px solid #acacac;
+	max-height: 75vh;
 	overflow: auto;
 }
 
