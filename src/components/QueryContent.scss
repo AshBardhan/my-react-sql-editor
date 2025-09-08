@@ -14,6 +14,7 @@
 	padding: 20px;
 	background-color: #f5f5f5;
 	border-bottom: 1px solid #acacac;
+	transition: all 0.2s ease-in-out;
 }
 
 .query-result {
@@ -36,6 +37,7 @@
 	border: 1px solid #acacac;
 	background-color: #ececec;
 	border-radius: 4px;
+	transition: all 0.2s ease-in-out;
 }
 
 .no-query-box {
@@ -57,6 +59,7 @@ table {
 	border: none;
 	border-collapse: separate;
 	border-spacing: 0;
+	transition: all 0.2s ease-in-out;
 }
 
 thead {
@@ -65,6 +68,7 @@ thead {
 		top: 0;
 		background-color: white;
 		border-bottom: 1px solid #ababab;
+		transition: all 0.2s ease-in-out;
 	}
 }
 
@@ -83,6 +87,7 @@ th {
 tbody {
 	tr:nth-child(even) {
 		background-color: #ededed;
+		transition: all 0.2s ease-in-out;
 	}
 }
 
